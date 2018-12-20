@@ -9,7 +9,17 @@
   "borderWidth": "", 
   "cached_js": null, 
   "cached_js_script_hash": null, 
-  "children": [], 
+  "children": [
+    {
+      "!type": "External", 
+      "file": [
+        "forms", 
+        "Form1", 
+        "Elements", 
+        "Button1.json"
+      ]
+    }
+  ], 
   "class": "", 
   "designHeight": 0, 
   "designWidth": 0, 
@@ -17,7 +27,7 @@
   "fullScreen": "true", 
   "height": 1004, 
   "id": "Form1", 
-  "language": "BASIC", 
+  "language": "JavaScript", 
   "left": "0", 
   "locked": false, 
   "modal": "false", 

@@ -1,0 +1,17 @@
+{
+  "name": "framework-converter.appstudio",
+  "version": "1.0.0",
+  "description": "App to convert a project to Bootstrap 4",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/nsbasic/framework-converter.appstudio.git",
+  "author": "NS BASIC Corporation",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^3.0.12",
+    "fs-extra": "^7.0.1",
+    "fs-readdir-recursive": "^1.1.0"
+  }
+}
