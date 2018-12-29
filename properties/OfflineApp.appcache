@@ -1,4 +1,5 @@
 assets
 main.js
+makeWinInstaller.js
 package-lock.json
 package.json
