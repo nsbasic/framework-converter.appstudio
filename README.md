@@ -10,7 +10,7 @@ Dependencies should be updated each time a change is made to the `package-lock.j
 1. Create a folder called local-deploy. It doesn't matter where.
 2. In AppStudio Preferences, set Deploy to the local-deploy folder.
 3. Deploy
-4. Open a console window in AppStudio-TNG.appstudio/local-deploy/AppStudio_TNG
+4. Open a console window in local-deploy/AppStudio_TNG
 5. do 'npm install' (first time only)
 6. do `npm start`
 7. In subsequent runs, just do steps 3, 7 and 8.
