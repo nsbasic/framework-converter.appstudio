@@ -1,6 +1,6 @@
 /* global
-  Button1
-  Button2
+  btnFind
+  btnBS3toBS4
   Input1
 */
 
@@ -12,8 +12,6 @@ const read = require('fs-readdir-recursive');
 const fs = require('fs-extra');
 
 const fileDialog = require('file-dialog');
-
-const samplesDir = '/Users/george/samples/BASIC/3. Controls/Bootstrap 3';
 
 let bs3controls = 0;
 let unconverted = 0;
@@ -95,8 +93,8 @@ const progressbarAnimated = {
 function convertB3toB4(props) {
   'use strict';
 
-	console.log('input', props);
-	const newProps = props;
+  console.log('input', props);
+  const newProps = props;
   let i;
   let j;
   let s;
@@ -242,7 +240,7 @@ function convertB3toB4(props) {
   return newProps;
 }
 
-Button1.onclick = (() => {
+btnBS3toBS4.onclick = (() => {
   'use strict';
 
   let i;
@@ -265,7 +263,7 @@ Button1.onclick = (() => {
   NSB.MsgBox(`BS3 Controls: ${bs3controls} Unconverted: ${unconverted}`);
 });
 
-Button2.onclick = (() => {
+btnFind.onclick = (() => {
   'use strict';
 
   fileDialog()
