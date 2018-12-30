@@ -9,18 +9,18 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 600, height: 800, icon:__dirname+'/img/AppStudio.icns'})
+  mainWindow = new BrowserWindow({width: 768, height: 1004, icon:__dirname+'/img/AppStudio.icns'})
   console.log(__dirname)
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
   
   // set up the menu
   const menu = Menu.buildFromTemplate(template)
-	Menu.setApplicationMenu(menu)	
+	// Menu.setApplicationMenu(menu)	
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
