@@ -15,6 +15,7 @@ const fileDialog = require('file-dialog');
 
 let bs3controls = 0;
 let unconverted = 0;
+let sep = '/';  // default MacOS - change if Windows
 
 // rules
 const buttonAppearance = {
@@ -249,8 +250,8 @@ btnBS3toBS4.onclick = (() => {
   const fileList = read(Input1.value);
   console.log(fileList);
   for (i = 0; i < fileList.length; i += 1) {
-    if (fileList[i].includes('/Elements/')) {
-      const filename = `${Input1.value}/${fileList[i]}`;
+    if (fileList[i].includes(`${sep}Elements${sep}`)) {
+      const filename = `${Input1.value}${sep}${fileList[i]}`;
       let props = fs.readJsonSync(filename);
       console.log(filename, fileList[i].props);
       if (props['!type'].substr(props['!type'].length - 3) === '_bs') {
@@ -268,9 +269,14 @@ btnFind.onclick = (() => {
 
   fileDialog()
     .then((file) => {
-      const path = file[0].path.split('/');
+      console.log(file[0]);
+      let path = file[0].path.split(sep);
+      if (path.length === 1) {
+        path = file[0].path.split('\\');
+        sep = '\\';
+      };
       path.pop();
       console.log(file, path);
-      Input1.value = path.join('/');
+      Input1.value = path.join(sep);
     });
 });
