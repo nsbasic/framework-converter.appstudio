@@ -24,32 +24,6 @@
             "Form1", 
             "Form1.json"
           ]
-        }, 
-        {
-          "!type": "Code", 
-          "cached_js": null, 
-          "cached_js_script_hash": null, 
-          "children": [], 
-          "expanded_pmp": null, 
-          "id": "main_js", 
-          "language": "JavaScript", 
-          "loadType": "", 
-          "obfuscate": "false", 
-          "script": "", 
-          "src": "includes/main.js"
-        }, 
-        {
-          "!type": "Code", 
-          "cached_js": null, 
-          "cached_js_script_hash": null, 
-          "children": [], 
-          "expanded_pmp": null, 
-          "id": "makeWinInstaller_js", 
-          "language": "JavaScript", 
-          "loadType": "", 
-          "obfuscate": "false", 
-          "script": "", 
-          "src": "includes/makeWinInstaller.js"
         }
       ], 
       "configxml": null, 

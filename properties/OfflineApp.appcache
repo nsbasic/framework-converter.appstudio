@@ -1,3 +1,5 @@
 assets
 package-lock.json
 package.json
+main.js
+makeWinInstaller.js

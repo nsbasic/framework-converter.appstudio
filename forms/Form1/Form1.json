@@ -34,6 +34,15 @@
         "forms", 
         "Form1", 
         "Elements", 
+        "btnFind.json"
+      ]
+    }, 
+    {
+      "!type": "External", 
+      "file": [
+        "forms", 
+        "Form1", 
+        "Elements", 
         "btnBS3toBS4.json"
       ]
     }, 
@@ -44,15 +53,6 @@
         "Form1", 
         "Elements", 
         "Card1.json"
-      ]
-    }, 
-    {
-      "!type": "External", 
-      "file": [
-        "forms", 
-        "Form1", 
-        "Elements", 
-        "btnFind.json"
       ]
     }
   ], 

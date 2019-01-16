@@ -9,14 +9,20 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 768, height: 1004, icon:__dirname+'/img/AppStudio.icns'})
+  mainWindow = new BrowserWindow({
+  	width: 768,
+  	height: 1004,
+  	icon:__dirname+'/img/AppStudio.icns',
+  	title: 'Framework Converter',
+  	webPreferences: {nodeIntegration: true},
+  	})
   console.log(__dirname)
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   
   // set up the menu
   const menu = Menu.buildFromTemplate(template)

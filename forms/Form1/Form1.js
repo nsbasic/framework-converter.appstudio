@@ -15,7 +15,9 @@ const fileDialog = require('file-dialog');
 
 let bs3controls = 0;
 let unconverted = 0;
-let sep = '/';  // default MacOS - change if Windows
+let sep = '/'; // default MacOS - change if Windows
+let projectPath = '';
+let unconvertedList = '';
 
 // rules
 const buttonAppearance = {
@@ -90,8 +92,17 @@ const progressbarAnimated = {
   b4: ['', ' progress-bar-animated'],
 };
 
+function convertProjectB3toB4() {
+  'use strict';
 
-function convertB3toB4(props) {
+  const project = fs.readJsonSync(projectPath);
+  if (project.children[0].BootstrapTheme === 'paper' || project.children[0].BootstrapTheme === 'readable') {
+    project.children[0].BootstrapTheme = 'bootstrap';
+    fs.writeJsonSync(projectPath, project, { spaces: 2, EOL: ' \n' });
+  }
+}
+
+function convertElementB3toB4(props) {
   'use strict';
 
   console.log('input', props);
@@ -99,6 +110,7 @@ function convertB3toB4(props) {
   let i;
   let j;
   let s;
+  let appears;
 
   function transform(rule) {
     for (i = 0; i < rule.b3.length; i += 1) {
@@ -174,7 +186,7 @@ function convertB3toB4(props) {
     case 'Listgroup_bs':
 
       if (newProps.fontSize === '') newProps.fontSize = '14';
-      const appears = newProps.appearances.split('\n');
+      appears = newProps.appearances.split('\n');
       s = '';
       for (i = 0; i < appears.length; i += 1) {
         for (j = 0; j < listGroupAppearance.b3.length; j += 1) {
@@ -196,6 +208,7 @@ function convertB3toB4(props) {
     case 'Pageheader_bs':
       newProps['!type'] = 'Container';
       unconverted += 1;
+      unconvertedList += `${newProps['id']}, `;
       break;
     case 'Pagination_bs':
       if (newProps.fontSize === '') newProps.fontSize = '14';
@@ -203,6 +216,7 @@ function convertB3toB4(props) {
     case 'Panel_bs':
       newProps['!type'] = 'Container';
       unconverted += 1;
+      unconvertedList += `${newProps['id']}, `;
       break;
     case 'Progressbar_bs':
       transform(progressbarAppearance);
@@ -223,6 +237,7 @@ function convertB3toB4(props) {
     case 'Tabs_bs':
       newProps['!type'] = 'Container';
       unconverted += 1;
+      unconvertedList += `${newProps['id']}, `;
       break;
     case 'Textarea_bs':
       transform(inputValidation);
@@ -231,6 +246,7 @@ function convertB3toB4(props) {
     case 'Thumbnail_bs':
       newProps['!type'] = 'Container';
       unconverted += 1;
+      unconvertedList += `${newProps['id']}, `;
       break;
     default:
       console.log('Unknown type', props['!type']);
@@ -247,8 +263,10 @@ btnBS3toBS4.onclick = (() => {
   let i;
   unconverted = 0;
   bs3controls = 0;
+
+  convertProjectB3toB4();
+
   const fileList = read(Input1.value);
-  console.log(fileList);
   for (i = 0; i < fileList.length; i += 1) {
     if (fileList[i].includes(`${sep}Elements${sep}`)) {
       const filename = `${Input1.value}${sep}${fileList[i]}`;
@@ -256,12 +274,12 @@ btnBS3toBS4.onclick = (() => {
       console.log(filename, fileList[i].props);
       if (props['!type'].substr(props['!type'].length - 3) === '_bs') {
         bs3controls += 1;
-        props = convertB3toB4(props);
+        props = convertElementB3toB4(props);
         fs.writeJsonSync(filename, props, { spaces: 2, EOL: ' \n' });
       }
     }
   }
-  NSB.MsgBox(`BS3 Controls: ${bs3controls} Unconverted: ${unconverted}`);
+  NSB.MsgBox(`BS3 Controls: ${bs3controls} Unconverted: ${unconverted} ${unconvertedList}`);
 });
 
 btnFind.onclick = (() => {
@@ -269,14 +287,13 @@ btnFind.onclick = (() => {
 
   fileDialog()
     .then((file) => {
-      console.log(file[0]);
+      projectPath = file[0].path;
       let path = file[0].path.split(sep);
       if (path.length === 1) {
         path = file[0].path.split('\\');
         sep = '\\';
-      };
+      }
       path.pop();
-      console.log(file, path);
       Input1.value = path.join(sep);
     });
 });
