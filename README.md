@@ -3,7 +3,7 @@ App to convert a project to Bootstrap 4
 
 ## Updating Dependencies
 
-Dependencies should be updated each time a change is made to the `package-lock.json` file. Dependencies can be updated by typing `npm install` as above.
+Dependencies should be updated each time a change is made to the `package.json` file. Dependencies can be updated by typing `npm install` as above.
 
 ## Running locally
 
