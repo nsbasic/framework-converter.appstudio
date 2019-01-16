@@ -52,6 +52,15 @@
         "forms", 
         "Form1", 
         "Elements", 
+        "btnJQMtoBS4.json"
+      ]
+    }, 
+    {
+      "!type": "External", 
+      "file": [
+        "forms", 
+        "Form1", 
+        "Elements", 
         "Card1.json"
       ]
     }
