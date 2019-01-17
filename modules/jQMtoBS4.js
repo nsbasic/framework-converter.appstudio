@@ -54,6 +54,11 @@ function convertElementJQMtoB4(props) {
       break;
     case 'FooterBar_jqm14':
       newProps['!type'] = 'Navs_bs4';
+      newProps.tabStyle = ' nav-tabs';
+      newProps.items = props.items.replace(', ', '\n');
+      newProps.top = 'auto';
+      newProps.left = '0';
+      newProps.bottom = '0';
       break;
     case 'HeaderBar_jqm14':
       newProps['!type'] = 'Header';
@@ -63,6 +68,8 @@ function convertElementJQMtoB4(props) {
       break;
     case 'NavBar_jqm14':
       newProps['!type'] = 'Navs_bs4';
+      newProps.tabStyle = ' nav-tabs';
+      newProps.items = props.items.replace(', ', '\n');
       break;
     case 'Panel_jqm14':
       newProps['!type'] = 'Card_bs4';
