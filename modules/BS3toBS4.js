@@ -5,6 +5,31 @@
   projectPath
 */
 
+const bs3Description = `This app converts all controls of a Bootstrap 3 project to Bootstrap 4. 
+
+<p><b>Notes</b>
+All controls are converted, with the exception of controls which were dropped in Bootstrap 4.
+These are:
+<ul>
+<li>Pageheader
+<li>Panel
+<li>Tabs
+<li>Thumbnail
+</ul>
+
+The converter will replace these controls with a simple Container of the same name and dimensions.
+You will need to replace these controls with a Bootstrap 4 control which works similarly.
+Panel and Thumbnail can be replaced with the Card control.
+Tabs can be replaced with the Navs control.
+Pageheader can be replaced with the Label control.
+
+<ul>
+<li>Font sizes may need to be adjusted, especially if you are using a theme.
+<li>The names of icons may be different. BS3 used Font Awesome, while BS4 uses Open Iconic. They have different names for icons.
+<li>Controls with Header/Detail structures (like Checkbox) will need tweaking afterwards. BS4 uses different spacing than BS3.
+You will need to test different screen widths to find issues.
+`;
+
 // rules
 const buttonAppearance = {
   field: 'appearance',

@@ -110,10 +110,10 @@
       "windowStyle": ""
     }
   ], 
-  "deploy_global": true, 
+  "deploy_global": false, 
   "deploy_key": "", 
-  "deploy_local": false, 
-  "deploy_localPath": "", 
+  "deploy_local": true, 
+  "deploy_localPath": "/Users/george/local-deploy", 
   "deploy_password": "", 
   "deploy_path": "", 
   "deploy_port": "21", 

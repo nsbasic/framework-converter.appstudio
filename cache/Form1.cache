@@ -47,6 +47,7 @@ btnBS3toBS4.onclick = (() => {
   unconverted = 0;
   unconvertedList = '';
   controls = 0;
+  Card1_text.innerHTML = bs3Description;
 
   convertProjectB3toB4();
 
@@ -73,6 +74,8 @@ btnJQMtoBS4.onclick = (() => {
   unconverted = 0;
   unconvertedList = '';
   controls = 0;
+  Card1_text.innerHTML = jQMDescription;
+
 
   convertProjectJQMtoB4();
 
@@ -84,7 +87,7 @@ btnJQMtoBS4.onclick = (() => {
       console.log(filename, fileList[i].props);
       if (props['!type'].substr(props['!type'].length - 6) === '_jqm14') {
         controls += 1;
-        props = convertElementJQMtoB4(props);
+        props = convertElementJQMtoB4(props, filename);
         fs.writeJsonSync(filename, props, { spaces: 2, EOL: ' \n' });
       }
     }
