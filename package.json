@@ -12,7 +12,7 @@
   },
   "repository": "https://github.com/nsbasic/framework-converter.appstudio.git",
   "author": "NS BASIC Corporation",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "dependencies": {
     "electron": "^4.0.1",
     "electron-packager": "^13.0.1",
