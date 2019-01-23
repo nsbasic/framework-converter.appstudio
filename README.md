@@ -1,6 +1,5 @@
 # framework-converter.appstudio
-App to convert a project to Bootstrap 4. Read more here: https://wiki.nsbasic.com/Framework_Converter#Running_the_Framework_Converter
-
+App to convert a project to Bootstrap 4. Read more here: https://wiki.nsbasic.com/Framework_Converter
 ## Updating Dependencies
 
 Dependencies should be updated each time a change is made to the `package.json` file. Dependencies can be updated by typing `npm install` as above.
