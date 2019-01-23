@@ -1,5 +1,5 @@
 # framework-converter.appstudio
-App to convert a project to Bootstrap 4
+App to convert a project to Bootstrap 4. Read more here: https://wiki.nsbasic.com/Framework_Converter#Running_the_Framework_Converter
 
 ## Updating Dependencies
 
