@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: "[Control Name] [Problem description]"
+title: "[jQM/BS3] [Control Name] [Problem description]"
 labels: ''
 assignees: ''
 
