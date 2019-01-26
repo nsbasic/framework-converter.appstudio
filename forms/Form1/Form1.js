@@ -8,6 +8,10 @@
 /* eslint no-undef: 'error' */
 /* eslint-env node */
 
+if (typeof require === 'undefined') {
+  NSB.MsgBox('This app cannot be run in a local browser. Please check the docs for more info.');
+}
+
 const read = require('fs-readdir-recursive');
 
 const fs = require('fs-extra');
