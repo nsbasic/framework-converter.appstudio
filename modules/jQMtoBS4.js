@@ -241,9 +241,17 @@ JQMtoBS4.convert = (() => {
         break;
 
       case 'Tooltip_jqm14':
-        newProps['!type'] = 'Container_bs4';
-        unconverted += 1;
-        unconvertedList += `${newProps.id}, `;
+        newProps['!type'] = 'Button_bs4';
+        newProps.popTitle = props.message;
+        newProps.popBody = props.popupmsg;
+        newProps.popPosition = 'right';
+        newProps.popStyle = 'tooltip';
+        newProps.value = '';
+        newProps.fontSize = '10px';
+        newProps.size = ' btn-sm';
+        newProps.class = 'rounded-circle';
+        newProps.height = 'auto';
+        newProps.width = 'auto';
         break;
 
       default:
