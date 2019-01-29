@@ -12,7 +12,7 @@ AppStudio 7.2.1 is required.
 2. In AppStudio Preferences, set Deploy to the local-deploy folder.
 3. Deploy
 4. Open a console window in local-deploy/framework-converter
-5. do 'npm install' (first time only)
+5. do `npm install` (first time only)
 6. do `npm start`
 7. In subsequent runs, just do steps 3 and 6.
 
