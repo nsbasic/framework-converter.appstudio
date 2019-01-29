@@ -2,7 +2,7 @@
   "name": "framework-converter.appstudio",
   "version": "1.0.0",
   "description": "App to convert a project to Bootstrap 4",
-  "main": "main.js",
+  "main": "electronMain.js",
   "scripts": {
     "start": "electron .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",

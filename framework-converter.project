@@ -50,6 +50,58 @@
           "obfuscate": "false", 
           "script": null, 
           "src": ""
+        }, 
+        {
+          "!type": "Code", 
+          "cached_js": null, 
+          "cached_js_script_hash": null, 
+          "children": [], 
+          "expanded_pmp": null, 
+          "id": "electronMain_js", 
+          "language": "JavaScript", 
+          "loadType": "noload", 
+          "obfuscate": "false", 
+          "script": "", 
+          "src": "electronMain.js"
+        }, 
+        {
+          "!type": "Code", 
+          "cached_js": null, 
+          "cached_js_script_hash": null, 
+          "children": [], 
+          "expanded_pmp": null, 
+          "id": "makeWinInstaller_js", 
+          "language": "JavaScript", 
+          "loadType": "noload", 
+          "obfuscate": "false", 
+          "script": "", 
+          "src": "makeWinInstaller.js"
+        }, 
+        {
+          "!type": "Code", 
+          "cached_js": null, 
+          "cached_js_script_hash": null, 
+          "children": [], 
+          "expanded_pmp": null, 
+          "id": "package_json", 
+          "language": "Other", 
+          "loadType": "", 
+          "obfuscate": "false", 
+          "script": "", 
+          "src": "package.json"
+        }, 
+        {
+          "!type": "Code", 
+          "cached_js": null, 
+          "cached_js_script_hash": null, 
+          "children": [], 
+          "expanded_pmp": null, 
+          "id": "README_md", 
+          "language": "Other", 
+          "loadType": "", 
+          "obfuscate": "false", 
+          "script": "", 
+          "src": "README.md"
         }
       ], 
       "configxml": null, 
