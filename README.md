@@ -4,6 +4,8 @@ App to convert a project to Bootstrap 4. Read more here: https://wiki.nsbasic.co
 
 Dependencies should be updated each time a change is made to the `package.json` file. Dependencies can be updated by typing `npm install` as above.
 
+AppStudio 7.2.1 is required.
+
 ## Running locally
 
 1. Create a folder called local-deploy. It doesn't matter where.
