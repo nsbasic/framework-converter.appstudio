@@ -25,7 +25,6 @@ JQMtoBS4.convert = (() => {
   <li>Collapsible
   <li>Panel
   <li>Popup
-  <li>Tooltip
   </ul>
 
   All controls will have some differences. Listgroup does convert, but the Bootstrap 4 version does
