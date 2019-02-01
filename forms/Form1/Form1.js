@@ -23,6 +23,10 @@ const JQMtoBS4 = {};
 let sep = '/'; // default MacOS - changes if Windows
 let projectPath = '';
 
+function Main() {
+  labVersion.value = AppVersion;
+}
+
 btnFind.onclick = (() => {
   'use strict';
 
