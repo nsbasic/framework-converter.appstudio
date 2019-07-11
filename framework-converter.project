@@ -10,6 +10,7 @@
       "BootstrapTheme": "bootstrap", 
       "EULA": null, 
       "FastClick": "false", 
+      "PWA_Manifest": null, 
       "appPublisher": "", 
       "background": "", 
       "backgroundimage": "", 

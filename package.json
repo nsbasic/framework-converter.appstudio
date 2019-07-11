@@ -14,9 +14,9 @@
   "author": "NS BASIC Corporation",
   "license": "GPL-3.0",
   "dependencies": {
-    "electron": "^4.0.1",
-    "electron-packager": "^13.0.1",
-    "electron-winstaller": "^2.7.0",
+    "electron": "^4.2.6",
+    "electron-packager": "^13.1.1",
+    "electron-winstaller": "^3.0.4",
     "file-dialog": "0.0.7",
     "fs-extra": "^7.0.1",
     "fs-readdir-recursive": "^1.1.0"
