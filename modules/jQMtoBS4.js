@@ -10,7 +10,7 @@
 
 /* eslint-disable no-console */
 
-JQMtoBS4.convert = (() => {
+JQMtoBS4.convert = ((projectPath, projectFolder) => {
   'use strict';
 
   Card1_text.innerHTML = `This app converts all controls of a jQuery Mobile project to Bootstrap 4. 
@@ -27,7 +27,7 @@ JQMtoBS4.convert = (() => {
   <li>Popup
   </ul>
 
-  All controls will have some differences. Listgroup does convert, but the Bootstrap 4 version does
+  All controls will have some differences. List does convert, but the Bootstrap 4 version does not
   have all the same features.<br>
 
   <p>The converter will replace these controls with a simple Container of the same name and dimensions.
@@ -37,28 +37,23 @@ JQMtoBS4.convert = (() => {
   `;
 
   let i;
-  let unconverted = 0;
-  let unconvertedList = '';
-  let controls = 0;
 
-  function convertProjectJQMtoB4() {
-    const project = fs.readJsonSync(projectPath);
-    if (project.children[0].BootstrapTheme === 'paper' || project.children[0].BootstrapTheme === 'readable') {
-      project.children[0].BootstrapTheme = 'bootstrap';
-      fs.writeJsonSync(projectPath, project, { spaces: 2, EOL: ' \n' });
-    }
+  function convertProjectJQMtoB4(appPath) {
+    const project = fs.readJsonSync(appPath);
+    fs.writeJsonSync(appPath, project, { spaces: 2, EOL: ' \n' });
   }
 
   function convertElementJQMtoB4(props, filename) {
-    console.log('input', props);
     const newProps = {};
     let j;
+    let noIcon;
+    let buttonName;
 
     function copyFields() {
       let ii;
       const fields = ['autocapitalize', 'autocomplete', 'autocorrect', 'ChangeForm', 'backgroundColor', 'borderColor', 'borderStyle', 'borderWidth',
         'bottom', 'class', 'color', 'disabled', 'display', 'fontFamily', 'fontSize',
-        'fontStyle', 'fontWeight', 'height', 'hidden', 'icon', 'id', 'left', 'name', 'onclick',
+        'fontStyle', 'fontWeight', 'height', 'hidden', 'icon', 'id', 'inputType', 'left', 'name', 'onclick',
         'oncopy', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseup', 'ontouchend',
         'ontouchmove', 'ontouchstart', 'placeholder', 'readonly', 'right', 'script', 'style', 'top', 'value', 'width'];
 
@@ -75,6 +70,7 @@ JQMtoBS4.convert = (() => {
         newProps['!type'] = 'Button_bs4';
         newProps.outline = 'outline-';
         if (props.mini === 'ui-mini') newProps.size = ' btn-sm';
+        if (props.iconPos === 'notext') newProps.value = '';
         break;
 
       case 'Checkbox_jqm14':
@@ -87,9 +83,9 @@ JQMtoBS4.convert = (() => {
         break;
 
       case 'Collapsible_jqm14':
-        newProps['!type'] = 'Container_bs4';
+        newProps['!type'] = 'Container';
         unconverted += 1;
-        unconvertedList += `${newProps.id}, `;
+        unconvertedList += `\n${filename}: ${newProps.id}, `;
         break;
 
       case 'FlipToggle_jqm14':
@@ -100,7 +96,7 @@ JQMtoBS4.convert = (() => {
 
       case 'FooterBar_jqm14':
         newProps['!type'] = 'Navs_bs4';
-        newProps.tabStyle = ' nav-tabs';
+        newProps.tabStyle = ' nav-pills';
         newProps.items = props.items.replace(/,/g, '\n');
         newProps.top = 'auto';
         newProps.left = '0';
@@ -110,10 +106,14 @@ JQMtoBS4.convert = (() => {
       case 'HeaderBar_jqm14':
         newProps['!type'] = 'Header';
         newProps.height = '40';
-        if (props.leftButtonName !== '' || props.leftButtonIconPos !== 'none') {
+        newProps.text = props.title;
+        newProps.position = 'absolute';
+        newProps.children = [];
+        noIcon = (props.leftButtonIcon === '' || props.leftButtonIcon === 'none' || props.leftButtonIcon === 'false' || props.leftButtonIconPos === 'none');
+        if (props.leftButtonName !== '' || !noIcon) {
+          buttonName = (props.leftButtonName === '') ? props.leftButtonIcon : props.leftButtonName;
           const id = `${props.id}_btnLeft`;
-          newProps.position = 'absolute';
-          newProps.children = [];
+          appendCode(filename, `${id}.onclick = function() {${props.id}.onclick("${buttonName}")}`);
           newProps.children.push({
             '!type': 'External',
             file: [
@@ -136,11 +136,13 @@ JQMtoBS4.convert = (() => {
             value: props.leftButtonName,
           };
           const buttonFile = filename.replace(`${props.id}.json`, `${id}.json`);
-          console.log('--->', buttonFile, buttonProps);
           fs.writeJsonSync(buttonFile, buttonProps, { spaces: 2, EOL: ' \n' });
         }
-        if (props.rightButtonName !== '' || props.rightButtonIconPos !== 'none') {
+        noIcon = (props.rightButtonIcon === '' || props.rightButtonIcon === 'none' || props.rightButtonIcon === 'false' || props.rightButtonIconPos === 'none');
+        if (props.rightButtonName !== '' || !noIcon) {
           const id = `${props.id}_btnRight`;
+          buttonName = (props.rightButtonName === '') ? props.rightButtonIcon : props.rightButtonName;
+          appendCode(filename, `${id}.onclick = function() {${props.id}.onclick("${buttonName}")}`);
           newProps.children.push({
             '!type': 'External',
             file: [
@@ -164,7 +166,6 @@ JQMtoBS4.convert = (() => {
             value: props.rightButtonName,
           };
           const buttonFile = filename.replace(`${props.id}.json`, `${id}.json`);
-          console.log('--->', buttonFile, buttonProps);
           fs.writeJsonSync(buttonFile, buttonProps, { spaces: 2, EOL: ' \n' });
         }
         break;
@@ -182,18 +183,20 @@ JQMtoBS4.convert = (() => {
 
       case 'NavBar_jqm14':
         newProps['!type'] = 'Navs_bs4';
-        newProps.tabStyle = ' nav-tabs';
+        newProps.tabStyle = ' nav-pills';
         newProps.items = props.items.replace(/,/g, '\n');
         break;
 
       case 'Panel_jqm14':
         newProps['!type'] = 'Card_bs4';
-        break;
-
-      case 'Popup_jqm14':
-        newProps['!type'] = 'Container_bs4';
         unconverted += 1;
-        unconvertedList += `${newProps.id}, `;
+        unconvertedList += `\n${filename}: ${newProps.id}, `;
+       break;
+
+      case 'PopUp_jqm14':
+        newProps['!type'] = 'Container';
+        unconverted += 1;
+        unconvertedList += `\n${filename}: ${newProps.id}, `;
         break;
 
       case 'RadioButton_jqm14':
@@ -202,7 +205,7 @@ JQMtoBS4.convert = (() => {
         newProps.headerCols = 0;
         newProps.valueCols = 12;
         newProps.items = props.items.replace(/,/g, '\n');
-        if (props.orientation === 'horizontal') newProps.inline = ' inline';
+        if (props.orientation === 'data-type=horizontal') newProps.inline = ' inline';
         break;
 
       case 'Select_jqm14':
@@ -257,24 +260,21 @@ JQMtoBS4.convert = (() => {
         console.log('Unknown type', props['!type']);
     }
 
-    console.log('output', newProps);
     return newProps;
   }
 
-  convertProjectJQMtoB4();
+  convertProjectJQMtoB4(projectPath);
 
-  const fileList = read(Input1.value);
+  const fileList = read(projectFolder);
   for (i = 0; i < fileList.length; i += 1) {
     if (fileList[i].includes(`${sep}Elements${sep}`)) {
-      const filename = `${Input1.value}${sep}${fileList[i]}`;
+      const filename = `${projectFolder}${sep}${fileList[i]}`;
       let props = fs.readJsonSync(filename);
-      console.log(filename, props);
-      if (props['!type'].substr(props['!type'].length - 6) === '_jqm14') {
+      if (props['!type'].endsWith('_jqm14')) {
         controls += 1;
         props = convertElementJQMtoB4(props, filename);
         fs.writeJsonSync(filename, props, { spaces: 2, EOL: ' \n' });
       }
     }
   }
-  NSB.MsgBox(`jQM Controls: ${controls} Unconverted: ${unconverted} ${unconvertedList}`);
 });

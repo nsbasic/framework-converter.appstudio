@@ -10,7 +10,7 @@
 
 /* eslint-disable no-console */
 
-BS3toBS4.convert = (() => {
+BS3toBS4.convert = ((projectPath, projectFolder) => {
   'use strict';
 
   Card1_text.innerHTML = `This app converts all controls of a Bootstrap 3 project to Bootstrap 4. 
@@ -112,15 +112,12 @@ BS3toBS4.convert = (() => {
   };
 
   let i;
-  let unconverted = 0;
-  let unconvertedList = '';
-  let controls = 0;
 
-  function convertProjectB3toB4() {
-    const project = fs.readJsonSync(projectPath);
+  function convertProjectB3toB4(appPath) {
+    const project = fs.readJsonSync(appPath);
     if (project.children[0].BootstrapTheme === 'paper' || project.children[0].BootstrapTheme === 'readable') {
       project.children[0].BootstrapTheme = 'bootstrap';
-      fs.writeJsonSync(projectPath, project, { spaces: 2, EOL: ' \n' });
+      fs.writeJsonSync(appPath, project, { spaces: 2, EOL: ' \n' });
     }
   }
 
@@ -228,7 +225,7 @@ BS3toBS4.convert = (() => {
       case 'Pageheader_bs':
         newProps['!type'] = 'Container';
         unconverted += 1;
-        unconvertedList += `${newProps.id}, `;
+        unconvertedList += `\n${filename}: ${newProps.id}, `;
         break;
       case 'Pagination_bs':
         if (newProps.fontSize === '') newProps.fontSize = '14';
@@ -236,7 +233,7 @@ BS3toBS4.convert = (() => {
       case 'Panel_bs':
         newProps['!type'] = 'Container';
         unconverted += 1;
-        unconvertedList += `${newProps.id}, `;
+        unconvertedList += `\n${filename}: ${newProps.id}, `;
         break;
       case 'Progressbar_bs':
         transform(progressbarAppearance);
@@ -257,7 +254,7 @@ BS3toBS4.convert = (() => {
       case 'Tabs_bs':
         newProps['!type'] = 'Container';
         unconverted += 1;
-        unconvertedList += `${newProps.id}, `;
+        unconvertedList += `\n${filename}: ${newProps.id}, `;
         break;
       case 'Textarea_bs':
         transform(inputValidation);
@@ -266,7 +263,7 @@ BS3toBS4.convert = (() => {
       case 'Thumbnail_bs':
         newProps['!type'] = 'Container';
         unconverted += 1;
-        unconvertedList += `${newProps.id}, `;
+        unconvertedList += `\n${filename}: ${newProps.id}, `;
         break;
       default:
         console.log('Unknown type', props['!type']);
@@ -276,16 +273,17 @@ BS3toBS4.convert = (() => {
     console.log('output', newProps);
     return newProps;
   }
+  console.log(projectPath, projectFolder);
+  convertProjectB3toB4(projectPath);
 
-  convertProjectB3toB4();
-
-  const fileList = read(Input1.value);
+  const fileList = read(projectFolder);
+  console.log(fileList);
   for (i = 0; i < fileList.length; i += 1) {
     if (fileList[i].includes(`${sep}Elements${sep}`)) {
-      const filename = `${Input1.value}${sep}${fileList[i]}`;
+      const filename = `${projectFolder}${sep}${fileList[i]}`;
       let props = fs.readJsonSync(filename);
       console.log(filename, fileList[i].props);
-      if (props['!type'].substr(props['!type'].length - 3) === '_bs') {
+      if (props['!type'].endsWith('_bs')) {
         controls += 1;
         props = convertElementB3toB4(props);
         fs.writeJsonSync(filename, props, { spaces: 2, EOL: ' \n' });
