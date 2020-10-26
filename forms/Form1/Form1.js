@@ -95,3 +95,25 @@ function appendCode(filename, code) {
   code = `\n\n${code}\n`;
   fs.writeFileSync(codeFile, code, {flag: "a"});
 }
+
+Button1.onclick=function(){
+  convert(addBASIC);
+}
+
+const addBASIC = {};
+addBASIC.convert = ((projectPath, projectFolder) => {
+  'use strict';
+
+  let i;
+
+  function convertProject(appPath) {
+    const project = fs.readJsonSync(appPath);
+    console.log(project.libraries);
+    if (project.libraries.indexOf('BASIC') < 0 ) project.libraries.push('BASIC');
+    console.log(project.libraries);
+    fs.writeJsonSync(appPath, project, { spaces: 2, EOL: ' \n' });
+  }
+
+  convertProject(projectPath);
+});
+
