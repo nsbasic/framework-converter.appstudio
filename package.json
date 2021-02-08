@@ -15,7 +15,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "electron": "^9.4.0",
-    "electron-packager": "^13.1.1",
+    "electron-packager": "^15.2.0",
     "electron-winstaller": "^3.0.4",
     "file-dialog": "0.0.7",
     "fs-extra": "^7.0.1",
