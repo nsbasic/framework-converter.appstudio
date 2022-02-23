@@ -18,7 +18,7 @@
     "electron-packager": "^15.4.0",
     "electron-winstaller": "^5.0.0",
     "file-dialog": "0.0.8",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.0.1",
     "fs-readdir-recursive": "^1.1.0"
   }
 }
