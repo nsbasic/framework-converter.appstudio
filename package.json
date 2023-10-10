@@ -14,7 +14,7 @@
   "author": "NS BASIC Corporation",
   "license": "GPL-3.0",
   "dependencies": {
-    "electron": "^26.2.4",
+    "electron": "^27.0.0",
     "electron-packager": "^17.1.2",
     "electron-winstaller": "^5.1.0",
     "file-dialog": "0.0.8",
